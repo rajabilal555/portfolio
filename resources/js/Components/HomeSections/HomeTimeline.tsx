@@ -16,7 +16,7 @@ function TimelineItem({
     children: React.ReactNode;
 }) {
     return (
-        <li className="mb-10 ms-4">
+        <li className="mb-8 ms-4">
             <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-primary-600"></div>
             <time className="mb-1 text-sm font-normal leading-none text-gray-400">
                 {date}
@@ -33,8 +33,8 @@ function TimelineItem({
 
 export default function HomeTimeline() {
     return (
-        <HomeSection title="My Timeline">
-            <ol className="relative m-6 border-primary-700 border-s">
+        <HomeSection title="Work Experience" className="mb-0">
+            <ol className="relative mx-6 mt-6 border-primary-700 border-s">
                 <TimelineItem
                     date={"OCT 2023 – PRESENT"}
                     title={"Flutter Developer"}

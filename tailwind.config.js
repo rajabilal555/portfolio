@@ -26,11 +26,10 @@ export default {
         extend: {
             colors: {
                 // background: "#252a3a",
-                background: "#191c1b",
-                foreground: "#e0e3e1",
+                background:"#0c0c0c",
+                // background: "#191c1b",
                 // background: "#030d0c",
-                // primary: "#5190ff",
-                // text: "#f5f5f5",
+                foreground: "#e0e3e1",
                 primary: {
                     100: "#70f9e0",
                     200: "#4edcc4",
@@ -54,6 +53,8 @@ export default {
                 "secondary-container-foreground": "#cde8e1",
                 "tertiary-container": "#2b4a60",
                 "tertiary-container-foreground": "#cae6ff",
+
+                "card": "#171819",
                 muted: "#6b7280",
             },
             fontFamily: {

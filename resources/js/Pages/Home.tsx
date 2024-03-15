@@ -1,21 +1,21 @@
-import { Link, Head } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import BaseLayout from "@/Layouts/BaseLayout";
-import { MdOutlineWavingHand, MdWavingHand } from "react-icons/md";
-import PrimaryButton from "@/Components/PrimaryButton";
+import { MdWavingHand } from "react-icons/md";
+import { FiChevronRight } from "react-icons/fi";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Divider from "@/Components/Divider";
 import TechCard from "@/Components/TechCard";
-import Card from "@/Components/Card";
 import SecondaryButton from "@/Components/SecondaryButton";
-import HoverLine from "@/Components/HoverLine";
 import HomeTimeline from "@/Components/HomeSections/HomeTimeline";
 import HomeSection from "@/Components/HomeSection";
+import ProjectCard from "@/Components/ProjectCard";
+import LinkButton from "@/Components/LinkButton";
 
 export default function Welcome({}: PageProps<{}>) {
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Bilal Pervez" />
             <BaseLayout>
                 <div className="flex flex-col w-full">
                     <h1 className="flex items-end gap-2 text-4xl font-[600] text-white">
@@ -57,13 +57,47 @@ export default function Welcome({}: PageProps<{}>) {
                         problems. I'm passionate about learning new technologies
                         and building scalable and maintainable software.
                     </p>
-
                     <Divider />
 
                     <HomeTimeline />
+                    <Divider className="mt-0" />
 
-                    <HomeSection title="Technologies">
-                        <div className="grid grid-cols-5 gap-4 m-6 text-primary">
+                    <HomeSection title="Some of my Projects">
+                        <div className="flex flex-col gap-6 mx-6">
+                            <div className="flex flex-col gap-4 text-primary">
+                                <ProjectCard
+                                    className="h-48 transition-all hover:scale-[102%]"
+                                    image="https://via.placeholder.com/150"
+                                    name="Flutter Project"
+                                    description={
+                                        "Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. "
+                                    }
+                                />
+                                <ProjectCard
+                                    className="h-48 transition-all hover:scale-[102%]"
+                                    image="https://via.placeholder.com/150"
+                                    name="Flutter Project"
+                                    description={
+                                        "Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. "
+                                    }
+                                    link="/projects"
+                                />
+                            </div>
+                            <div className="flex w-full">
+                                <LinkButton href="/projects" className="group">
+                                    View all Projects
+                                    <FiChevronRight
+                                        size={16}
+                                        className="transition-all group-hover:translate-x-1"
+                                    />
+                                </LinkButton>
+                            </div>
+                        </div>
+                    </HomeSection>
+                    {/* <Divider className="mt-0" /> */}
+
+                    <HomeSection title="My evolving skillset">
+                        <div className="grid grid-cols-3 gap-4 mx-6 md:grid-cols-5 text-primary">
                             <TechCard tech="laravel" />
                             <TechCard tech="flutter" />
                             <TechCard tech="react" />
