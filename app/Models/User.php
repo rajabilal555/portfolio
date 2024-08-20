@@ -20,6 +20,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'links',
+        'first_name',
+        'last_name',
+        'nick_name',
+        'short_about',
+        'about',
     ];
 
     /**
@@ -42,6 +48,13 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'links' => 'array',
         ];
     }
+
+    public static function getPortfolioUser(): self
+    {
+        return static::find(config('app.portfolio_user_id'))->first();
+    }
+
 }

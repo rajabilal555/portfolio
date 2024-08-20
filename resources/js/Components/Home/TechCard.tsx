@@ -1,14 +1,14 @@
-import { cn } from "@/lib/utils";
-import { ReactTyped } from "react-typed";
+import {cn} from "@/lib/utils";
+import {ReactTyped} from "react-typed";
 
 export default function TechCard({
-    tech,
-    techName,
-    className = "",
-}: {
+                                     techName,
+                                     iconUrl,
+                                     className = "",
+                                 }: {
     className?: string;
-    tech: string;
-    techName?: string;
+    techName: string;
+    iconUrl: string;
 }) {
     return (
         <div
@@ -19,11 +19,12 @@ export default function TechCard({
         >
             <img
                 className="transition-all grayscale contrast-150 group-hover/section:grayscale-0"
-                src={`https://skillicons.dev/icons?i=${tech}`}
+                src={iconUrl}
+                alt={techName}
             />
             <ReactTyped
                 startWhenVisible
-                strings={[techName ?? tech]}
+                strings={[techName]}
                 typeSpeed={60}
                 // showCursor={false}
                 loop={true}

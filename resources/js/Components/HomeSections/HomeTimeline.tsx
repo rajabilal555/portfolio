@@ -1,8 +1,5 @@
 import React from "react";
-import Card from "../Card";
-import HoverLine from "../HoverLine";
-import HeaderText from "../HeaderText";
-import HomeSection from "../HomeSection";
+import HomeSection from "./HomeSection";
 
 function TimelineItem({
     title,

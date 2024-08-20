@@ -2,6 +2,11 @@
 
 return [
 
+    'enable_blog' => env('ENABLE_BLOG', false),
+
+    'portfolio_user_id' => env('APP_PORTFOLIO_USER_ID', 1),
+    'portfolio_name' => env('APP_PORTFOLIO_NAME', 'Bilal Pervez'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -13,7 +18,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Bilal Pervez'),
+    'name' => env('APP_NAME', 'Portfolio'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +44,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------

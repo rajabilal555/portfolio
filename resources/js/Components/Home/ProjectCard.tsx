@@ -1,6 +1,6 @@
 import { cn, limitString } from "@/lib/utils";
 import { Link } from "@inertiajs/react";
-import OutlineButton from "./OutlineButton";
+import OutlineButton from "../OutlineButton";
 import { toNamespacedPath } from "path/posix";
 
 export default function ProjectCard({
@@ -19,12 +19,12 @@ export default function ProjectCard({
     return (
         <div
             className={cn(
-                "flex flex-row items-start gap-4 p-6 rounded-md h-48 bg-card hover:scale-[102%]",
+                "flex flex-row items-start gap-4 p-6 rounded-md h-48 transition-all bg-card hover:scale-[102%]",
                 className
             )}
         >
             {image && (
-                <div className="h-full aspect-square ">
+                <div className="h-full aspect-square">
                     <img
                         src={image}
                         alt="Project Image"
