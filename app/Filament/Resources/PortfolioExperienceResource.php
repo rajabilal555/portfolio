@@ -29,9 +29,15 @@ class PortfolioExperienceResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('company')
                     ->required(),
-                Forms\Components\DateTimePicker::make('period')
 
+                Forms\Components\DatePicker::make('period_start_at')
+//                    ->native(false)
+                    ->maxDate(now())
                     ->required(),
+                Forms\Components\DatePicker::make('period_end_at')
+//                    ->native(false)
+                    ->maxDate(now()),
+
                 Forms\Components\MarkdownEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
@@ -41,16 +47,20 @@ class PortfolioExperienceResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('order')
+            ->defaultSort('order')
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('company')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('period')
+                Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('order')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('period_start_at')
+                    ->date()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('period_end_at')
+                    ->date()
+                    ->placeholder("PRESENT")
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

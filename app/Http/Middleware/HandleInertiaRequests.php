@@ -57,7 +57,7 @@ class HandleInertiaRequests extends Middleware
 
                 'skills' => PortfolioSkill::where('is_active', true)->orderBy('order')->get(),
                 'projects' => PortfolioProject::where('is_active', true)->where('is_featured', true)->get(),
-                'experiences' => PortfolioExperience::where('is_active', true)->get(),
+                'experiences' => PortfolioExperience::where('is_active', true)->orderBy('order')->get(),
             ],
             'auth' => [
                 'user' => $request->user(),

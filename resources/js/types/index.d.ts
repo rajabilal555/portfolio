@@ -20,8 +20,8 @@ export interface PortfolioExperience {
     title: string;
     company: string;
     description: string;
-    period_start_at: string;
-    period_end_at: string;
+    period_start_at: Date;
+    period_end_at?: Date;
     is_active: boolean;
 }
 

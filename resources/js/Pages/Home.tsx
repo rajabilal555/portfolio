@@ -3,7 +3,6 @@ import {PageProps} from "@/types";
 import BaseLayout from "@/Layouts/BaseLayout";
 import {MdWavingHand} from "react-icons/md";
 import {FiChevronRight} from "react-icons/fi";
-import {FaGithub, FaLinkedin} from "react-icons/fa";
 import Divider from "@/Components/Divider";
 import TechCard from "@/Components/Home/TechCard";
 import SecondaryButton from "@/Components/SecondaryButton";
@@ -13,9 +12,9 @@ import ProjectCard from "@/Components/Home/ProjectCard";
 import LinkButton from "@/Components/LinkButton";
 import DynamicFAIcon from "@/Components/Icons/DynamicFAIcons";
 import Markdown from "react-markdown";
-import {customMarkdownComponents} from "@/lib/markdown-utils";
+import {mdC, mdPrimaryStrong} from "@/lib/markdown-utils";
 
-export default function Home({portfolio}: PageProps<{}>) {
+export default function Home({portfolio}: PageProps) {
     return (
         <>
             <Head title={`<${portfolio.name} />`}/>
@@ -47,12 +46,12 @@ export default function Home({portfolio}: PageProps<{}>) {
                             </a>
                         ))}
                     </div>
-                    <Markdown className="mt-4 text-justify" components={customMarkdownComponents}>
+                    <Markdown className="mt-4 text-justify" components={mdC([mdPrimaryStrong])}>
                         {portfolio.short_about}
                     </Markdown>
                     <Divider/>
 
-                    <HomeTimeline/>
+                    <HomeTimeline portfolio={portfolio}/>
                     <Divider className="mt-0"/>
 
                     <HomeSection title="Some of my Projects">

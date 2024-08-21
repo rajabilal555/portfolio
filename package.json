@@ -31,6 +31,7 @@
     },
     "dependencies": {
         "@loadable/component": "^5.16.4",
+        "dayjs": "^1.11.13",
         "react-markdown": "^9.0.1"
     }
 }

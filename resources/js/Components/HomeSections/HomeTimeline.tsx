@@ -1,12 +1,17 @@
 import React from "react";
 import HomeSection from "./HomeSection";
+import {PageProps} from "@/types";
+import Markdown from "react-markdown";
+import {mdC, mdExperienceList, mdPrimaryStrong} from "@/lib/markdown-utils";
+import dayjs from "dayjs";
+import {formatExperienceDate} from "@/lib/utils";
 
 function TimelineItem({
-    title,
-    company,
-    date,
-    children,
-}: {
+                          title,
+                          company,
+                          date,
+                          children,
+                      }: {
     title: string;
     company: string;
     date: string;
@@ -14,8 +19,9 @@ function TimelineItem({
 }) {
     return (
         <li className="mb-8 ms-4">
-            <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-primary-600"></div>
-            <time className="mb-1 text-sm font-normal leading-none text-gray-400">
+            <div
+                className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-primary-600"></div>
+            <time className="mb-1 text-sm font-normal leading-none text-gray-400 uppercase">
                 {date}
             </time>
             <div className="flex items-center gap-1 text-lg">
@@ -28,86 +34,23 @@ function TimelineItem({
     );
 }
 
-export default function HomeTimeline() {
+
+export default function HomeTimeline({portfolio}: { portfolio: PageProps['portfolio'] }) {
     return (
         <HomeSection title="Work Experience" className="mb-0">
             <ol className="relative mx-6 mt-6 border-primary-700 border-s">
-                <TimelineItem
-                    date={"OCT 2023 – PRESENT"}
-                    title={"Flutter Developer"}
-                    company={"Carly"}
-                >
-                    <ul className="ml-4 list-disc">
-                        <li>Boosted project development efficiency by 60%.</li>
-                        <li>
-                            Collaborated with the backend design team, providing
-                            valuable input to improve the overall system
-                            architecture and efficiency.
-                        </li>
-                        <li>
-                            Collaborated with the design team to implement
-                            user-friendly and practical designs.
-                        </li>
-
-                        <li>
-                            Helped add a real-time web sockets feature by
-                            working closely with the team.
-                        </li>
-                    </ul>
-                </TimelineItem>
-                <TimelineItem
-                    date={"DEC 2018 – PRESENT"}
-                    title={"Full stack Engineer"}
-                    company={"Freelance"}
-                >
-                    <ul className="ml-4 list-disc">
-                        <li>
-                            Developed and deployed diverse web applications,
-                            mobile apps, and custom software using various
-                            programming languages, frameworks, and technologies.
-                        </li>
-                        <li>
-                            Collaborated closely with clients to understand and
-                            meet their specific software needs.
-                        </li>
-                        <li>
-                            Proficient in problem-solving, troubleshooting, and
-                            efficiently resolving technical issues.
-                        </li>
-                        <li>
-                            Skilled in project management and communication,
-                            ensuring effective coordination with clients,
-                            stakeholders, and team members.
-                        </li>
-                    </ul>
-                </TimelineItem>
-
-                <TimelineItem
-                    date={"OCT 2020 – SEP 2022"}
-                    title={"Backend Engineer"}
-                    company={"Softologics"}
-                >
-                    <ul className="ml-4 list-disc">
-                        <li>
-                            Developed and deployed diverse web applications,
-                            mobile apps, and custom software using various
-                            programming languages, frameworks, and technologies.
-                        </li>
-                        <li>
-                            Collaborated closely with clients to understand and
-                            meet their specific software needs.
-                        </li>
-                        <li>
-                            Proficient in problem-solving, troubleshooting, and
-                            efficiently resolving technical issues.
-                        </li>
-                        <li>
-                            Skilled in project management and communication,
-                            ensuring effective coordination with clients,
-                            stakeholders, and team members.
-                        </li>
-                    </ul>
-                </TimelineItem>
+                {portfolio.experiences.map((experience) => (
+                    <TimelineItem
+                        key={experience.id}
+                        date={`${formatExperienceDate(experience.period_start_at)} – ${formatExperienceDate(experience.period_end_at)}`}
+                        title={experience.title}
+                        company={experience.company}
+                    >
+                        <Markdown components={mdC([mdExperienceList, mdPrimaryStrong])}>
+                            {experience.description}
+                        </Markdown>
+                    </TimelineItem>
+                ))}
             </ol>
         </HomeSection>
     );

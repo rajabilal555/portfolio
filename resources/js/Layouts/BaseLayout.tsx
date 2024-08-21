@@ -2,9 +2,10 @@ import NavLink from "@/Components/NavLink";
 import {PropsWithChildren} from "react";
 import {usePage} from "@inertiajs/react";
 import {PageProps} from "@/types";
+import dayjs from "dayjs";
 
 export default function BaseLayout({children}: PropsWithChildren) {
-    const {config: {enable_blog}} = usePage().props as unknown as PageProps;
+    const {config: {enable_blog}, portfolio} = usePage().props as unknown as PageProps;
 
     return (
         <>
@@ -16,7 +17,7 @@ export default function BaseLayout({children}: PropsWithChildren) {
                     <div className="max-w-screen-2xl">
                         <header className="flex flex-row justify-between">
                             {/*{route().current() == undefined || (*/}
-                            <h3 className="text-xl text-primary font-semibold">Bilal Pervez</h3>
+                            <h3 className="text-xl text-primary font-semibold">{portfolio.name}</h3>
                             {/*)}*/}
                             {/*navigation */}
                             <nav className="flex gap-4">
@@ -50,7 +51,7 @@ export default function BaseLayout({children}: PropsWithChildren) {
                         {/* footer */}
                         <div className="flex justify-center mt-4">
                             <p className="text-sm text-slate-400">
-                                &copy; 2024 Bilal Pervez. All rights reserved.
+                                &copy; {dayjs().year()} {portfolio.name}. All rights reserved.
                             </p>
                         </div>
                     </div>
