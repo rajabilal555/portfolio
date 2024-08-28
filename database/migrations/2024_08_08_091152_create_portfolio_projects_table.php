@@ -15,9 +15,10 @@ return new class extends Migration {
             $table->string('title');
             $table->string('short_description');
             $table->text('description');
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
             $table->json('actions');
             $table->json('tags');
+            $table->integer('order')->default(0);
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

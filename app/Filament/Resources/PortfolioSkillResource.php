@@ -17,8 +17,8 @@ class PortfolioSkillResource extends Resource
 {
     protected static ?string $model = PortfolioSkill::class;
 
+    protected static ?string $label = 'Skills';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static ?string $navigationGroup = 'Portfolio';
 
     public static function form(Form $form): Form
@@ -37,7 +37,6 @@ class PortfolioSkillResource extends Resource
                 Forms\Components\TextInput::make('icon_url')
                     ->label('Icon')
                     ->url()
-                    ->default('https://skillicons.dev/icons?i=')
                     ->required(),
 
                 Forms\Components\Toggle::make('is_active')

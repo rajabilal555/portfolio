@@ -17,7 +17,7 @@ export function generatePageTitle(title: string) {
 }
 
 export function formatExperienceDate(date?: Date) {
-    if(date==null){
+    if (date == null) {
         return "PRESENT";
     }
     return dayjs(date).format('MMM YYYY');

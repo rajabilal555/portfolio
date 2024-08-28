@@ -1,14 +1,14 @@
-import { InertiaLinkProps, Link } from "@inertiajs/react";
-import { ButtonHTMLAttributes, LinkHTMLAttributes } from "react";
+import {InertiaLinkProps, Link} from "@inertiajs/react";
+import {ButtonHTMLAttributes, LinkHTMLAttributes} from "react";
 
 export default function LinkButton({
-    className = "",
-    disabled,
-    children,
-    ...props
-}: InertiaLinkProps & { disabled?: boolean } & ButtonHTMLAttributes<
-        HTMLButtonElement | HTMLAnchorElement | HTMLAnchorElement
-    >) {
+                                       className = "",
+                                       disabled,
+                                       children,
+                                       ...props
+                                   }: InertiaLinkProps & { disabled?: boolean } & ButtonHTMLAttributes<
+    HTMLButtonElement | HTMLAnchorElement
+>) {
     return (
         <Link
             {...props}

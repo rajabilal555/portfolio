@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PortfolioProject;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,7 +17,8 @@ Route::get('/blog', function () {
 })->name('blog');
 
 Route::get('/about', function () {
-    return Inertia::render('About');
+    $allProjects = PortfolioProject::where('is_active', true)->get();
+    return Inertia::render('About', compact('allProjects'));
 })->name('about');
 
 Route::get('/contact', function () {

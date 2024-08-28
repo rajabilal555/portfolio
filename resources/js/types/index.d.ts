@@ -27,11 +27,15 @@ export interface PortfolioExperience {
 
 export interface PortfolioProject {
     id: number;
-    name: string;
+    title: string;
     short_description: string;
     description: string;
     image_url: string;
-    actions: Array<Map<string, string>>;
+    actions:  Array<{
+        icon: string,
+        name: string,
+        url: string,
+    }>;
     tags: Array<string>;
     is_featured: boolean;
     is_active: boolean;

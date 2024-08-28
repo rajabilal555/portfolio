@@ -5,11 +5,11 @@ import {MdWavingHand} from "react-icons/md";
 import {FiChevronRight} from "react-icons/fi";
 import Divider from "@/Components/Divider";
 import TechCard from "@/Components/Home/TechCard";
-import SecondaryButton from "@/Components/SecondaryButton";
+import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import HomeTimeline from "@/Components/HomeSections/HomeTimeline";
 import HomeSection from "@/Components/HomeSections/HomeSection";
 import ProjectCard from "@/Components/Home/ProjectCard";
-import LinkButton from "@/Components/LinkButton";
+import LinkButton from "@/Components/Buttons/LinkButton";
 import DynamicFAIcon from "@/Components/Icons/DynamicFAIcons";
 import Markdown from "react-markdown";
 import {mdC, mdPrimaryStrong} from "@/lib/markdown-utils";
@@ -56,22 +56,13 @@ export default function Home({portfolio}: PageProps) {
 
                     <HomeSection title="Some of my Projects">
                         <div className="flex flex-col gap-6 mx-6">
-                            <div className="flex flex-col gap-4 text-primary">
-                                <ProjectCard
-                                    image="https://via.placeholder.com/150"
-                                    name="Flutter Project"
-                                    description={
-                                        "Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. "
-                                    }
-                                />
-                                <ProjectCard
-                                    image="https://via.placeholder.com/150"
-                                    name="Flutter Project"
-                                    description={
-                                        "Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet.Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. Lorem Ipsum Dolor Sit Amet. "
-                                    }
-                                    link="/projects"
-                                />
+                            <div className="space-y-4 columns-1 md:columns-2 text-primary">
+                                {portfolio.projects.map((project) => (
+                                    <ProjectCard
+                                        key={project.id}
+                                        project={project}
+                                    />
+                                ))}
                             </div>
                             <div className="flex w-full">
                                 <LinkButton href={route('about')} className="group">
