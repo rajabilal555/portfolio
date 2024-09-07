@@ -30,7 +30,7 @@ export interface PortfolioProject {
     title: string;
     short_description: string;
     description: string;
-    image_url: string;
+    image_url?: string;
     actions:  Array<{
         icon: string,
         name: string,

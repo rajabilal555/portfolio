@@ -56,14 +56,12 @@ export default function Home({portfolio}: PageProps) {
 
                     <HomeSection title="Some of my Projects">
                         <div className="flex flex-col gap-6 mx-6">
-                            <div className="space-y-4 columns-1 md:columns-2 text-primary">
-                                {portfolio.projects.map((project) => (
-                                    <ProjectCard
-                                        key={project.id}
-                                        project={project}
-                                    />
-                                ))}
-                            </div>
+                            {portfolio.projects.map((project) => (
+                                <ProjectCard
+                                    key={project.id}
+                                    project={project}
+                                />
+                            ))}
                             <div className="flex w-full">
                                 <LinkButton href={route('about')} className="group">
                                     View all Projects

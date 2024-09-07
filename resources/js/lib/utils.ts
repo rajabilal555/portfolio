@@ -22,3 +22,15 @@ export function formatExperienceDate(date?: Date) {
     }
     return dayjs(date).format('MMM YYYY');
 }
+
+export function randomBackgroundPattern() {
+    const patterns = [
+        "pattern-wavy",
+        // "pattern-dots",
+        // "pattern-paper",
+        "pattern-triangles",
+        "pattern-zigzag-3d",
+        "pattern-isometric",
+    ];
+    return cn("pattern-bg-background pattern-gray-500 pattern-opacity-20 pattern-size-10", patterns[Math.floor(Math.random() * patterns.length)]);
+}
