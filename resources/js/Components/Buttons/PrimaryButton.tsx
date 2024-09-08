@@ -12,7 +12,7 @@ export default function PrimaryButton({
             {...props}
             className={
                 cn(
-                    "inline-flex gap-2 items-center px-4 py-1 bg-primary-container border border-transparent rounded-md font-semibold text-xs text-primary-container-foreground uppercase tracking-widest hover:bg-primary-600 active:bg-primary-800 focus:outline-none transition ease-in-out duration-150",
+                    "inline-flex gap-2 items-center px-3 py-1 bg-primary-container border border-transparent rounded-md font-semibold text-xs text-primary-container-foreground uppercase tracking-widest hover:bg-primary-600 active:bg-primary-800 focus:outline-none transition ease-in-out duration-150",
                     {
                         "opacity-25": disabled,
                     },

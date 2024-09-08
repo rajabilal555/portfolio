@@ -25,6 +25,7 @@ class User extends Authenticatable
         'last_name',
         'nick_name',
         'short_about',
+        'resume_url',
         'about',
     ];
 

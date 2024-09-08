@@ -6,11 +6,9 @@ export default function LinkButton({
                                        disabled,
                                        children,
                                        ...props
-                                   }: InertiaLinkProps & { disabled?: boolean } & ButtonHTMLAttributes<
-    HTMLButtonElement | HTMLAnchorElement
->) {
+                                   }: ButtonHTMLAttributes<HTMLButtonElement>) {
     return (
-        <Link
+        <button
             {...props}
             className={
                 `inline-flex gap-2 items-center justify-center py-1 px-3 rounded-md font-semibold text-xs text-primary-100 uppercase tracking-wide active:bg-primary-800/80 focus:outline-none transition ease-in-out duration-100 ${
@@ -20,6 +18,6 @@ export default function LinkButton({
             disabled={disabled}
         >
             {children}
-        </Link>
+        </button>
     );
 }

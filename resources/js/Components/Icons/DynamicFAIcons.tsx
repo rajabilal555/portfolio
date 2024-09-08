@@ -1,5 +1,5 @@
 import {CSSProperties, SVGAttributes} from "react";
-import {IconContext} from "react-icons";
+import {IconContext} from "react-icons/lib";
 import loadable from "@loadable/component";
 
 interface IProps {

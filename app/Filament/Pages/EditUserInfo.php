@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Support\Exceptions\Halt;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class EditUserInfo extends Page implements Forms\Contracts\HasForms
 {
@@ -51,6 +52,13 @@ class EditUserInfo extends Page implements Forms\Contracts\HasForms
                             ->columnSpanFull(),
                         Forms\Components\MarkdownEditor::make('about')
                             ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('resume_url')
+                            ->getUploadedFileNameForStorageUsing(
+                                fn(TemporaryUploadedFile $file): string => (string)str('')->prepend(User::getPortfolioUser()->name)
+                                    ->append('-resume-'.date('Ymds'))->append(".{$file->getClientOriginalExtension()}"),
+                            )
+                            ->label('Resume')
                             ->columnSpanFull(),
                         Forms\Components\Repeater::make('links')
                             ->schema([

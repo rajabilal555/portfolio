@@ -1,4 +1,4 @@
-import {Head} from "@inertiajs/react";
+import {Head, Link} from "@inertiajs/react";
 import {PageProps} from "@/types";
 import BaseLayout from "@/Layouts/BaseLayout";
 import {MdWavingHand} from "react-icons/md";
@@ -63,13 +63,15 @@ export default function Home({portfolio}: PageProps) {
                                 />
                             ))}
                             <div className="flex w-full">
-                                <LinkButton href={route('about')} className="group">
-                                    View all Projects
-                                    <FiChevronRight
-                                        size={16}
-                                        className="transition-all group-hover:translate-x-1"
-                                    />
-                                </LinkButton>
+                                <Link href={route('about')}>
+                                    <LinkButton className="group">
+                                        View all Projects
+                                        <FiChevronRight
+                                            size={16}
+                                            className="transition-all group-hover:translate-x-1"
+                                        />
+                                    </LinkButton>
+                                </Link>
                             </div>
                         </div>
                     </HomeSection>

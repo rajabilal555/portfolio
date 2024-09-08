@@ -44,11 +44,13 @@ export interface PortfolioProject {
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     portfolio: {
         name: string,
+        email: string,
         first_name: string,
         last_name: string,
         nick_name: string,
         short_about: string,
         about: string,
+        resume_url?: string,
         links: Array<{
             icon: string,
             name: string,

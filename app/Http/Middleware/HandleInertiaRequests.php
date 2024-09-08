@@ -48,12 +48,14 @@ class HandleInertiaRequests extends Middleware
             ],
             'portfolio' => [
                 'name' => $portfolioUser->name,
+                'email' => $portfolioUser->email,
                 'first_name' => $portfolioUser->first_name,
                 'last_name' => $portfolioUser->last_name,
                 'nick_name' => $portfolioUser->nick_name,
                 'short_about' => $portfolioUser->short_about,
                 'about' => $portfolioUser->about,
                 'links' => $portfolioUser->links,
+                'resume_url' => $portfolioUser->resume_url,
 
                 'skills' => PortfolioSkill::where('is_active', true)->orderBy('order')->get(),
                 'projects' => PortfolioProject::where('is_active', true)->where('is_featured', true)->get(),

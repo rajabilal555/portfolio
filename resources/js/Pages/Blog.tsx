@@ -6,6 +6,7 @@ import {generatePageTitle} from "@/lib/utils";
 import PageTitle from "@/Components/PageTitle";
 
 export default function Blog({}: PageProps<{}>) {
+    // TODO:
 
     let blogItems = [
         {
@@ -39,9 +40,9 @@ export default function Blog({}: PageProps<{}>) {
                     <PageTitle>Blog</PageTitle>
                     <div className="mt-5 flex flex-col gap-4 text-primary">
                         {
-                            blogItems.map((item, index) => (
+                            blogItems.map((item, _) => (
                                 <BlogCard key={item.id} name={item.name} description={item.description}
-                                          image={item.image} link={item.link}/>
+                                          link={item.link}/>
                             ))
                         }
                     </div>

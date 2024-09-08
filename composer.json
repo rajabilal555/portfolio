@@ -12,7 +12,7 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "tightenco/ziggy": "^2.0",
+        "tightenco/ziggy": "^2.3",
         "wiebenieuwenhuis/filament-code-editor": "^1.1"
     },
     "require-dev": {
@@ -54,7 +54,7 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"file_exists('database/persistent/database.sqlite') || touch('database/persistent/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ]
     },
