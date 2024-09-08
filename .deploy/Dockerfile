@@ -18,6 +18,8 @@ RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 # Install composer
 COPY --from=composer/composer:2 /usr/bin/composer /usr/local/bin/composer
 
+RUN npm install -g pnpm
+
 FROM php-system-setup AS app-setup
 
 # Set working directory
@@ -38,19 +40,19 @@ RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP /etc/crontabs/$NON_ROOT_USER && setc
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
 USER $NON_ROOT_USER
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader --no-interaction
 RUN rm -rf /home/$NON_ROOT_USER/.composer
 
-RUN npm install
+RUN pnpm install
 
 # Copy app
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 
-RUN npm run build
+RUN pnpm run build
 
 # Set any ENVs
 ARG ENABLE_BLOG=${ENABLE_BLOG}
@@ -103,5 +105,8 @@ ARG CAPROVER_GIT_COMMIT_SHA=${CAPROVER_GIT_COMMIT_SHA}
 # Start app
 EXPOSE 80
 COPY ./.deploy/entrypoint.sh /
+
+# Optimize composer autoloader after all dependencies are installed and envs are set
+RUN composer dump-autoload --no-interaction --no-dev --optimize
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
