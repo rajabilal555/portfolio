@@ -11,10 +11,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('short_about')->default('');
-            $table->text('about')->default('');
+            $table->text('short_about')->nullable();
+            $table->text('about')->nullable();
 
-            $table->json('links')->default('[]');
+            $table->json('links')->nullable();
             $table->string('first_name')->default('');
             $table->string('last_name')->default('');
             $table->string('nick_name')->nullable();
