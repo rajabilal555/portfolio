@@ -106,7 +106,4 @@ ARG CAPROVER_GIT_COMMIT_SHA=${CAPROVER_GIT_COMMIT_SHA}
 EXPOSE 80
 COPY ./.deploy/entrypoint.sh /
 
-# Optimize composer autoloader after all dependencies are installed and envs are set
-RUN composer dump-autoload --no-interaction --no-dev --optimize
-
 ENTRYPOINT ["sh", "/entrypoint.sh"]
