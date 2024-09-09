@@ -22,6 +22,12 @@ export default function TechCard({
                 src={iconUrl}
                 alt={techName}
             />
+            <noscript>
+                <p
+                    className="capitalize group-hover:text-white group-hover:[text-shadow:_0_0_10px_#fff,_0_0_20px_#fff]">
+                    {techName}
+                </p>
+            </noscript>
             <ReactTyped
                 startWhenVisible
                 strings={[techName]}

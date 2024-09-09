@@ -31,11 +31,10 @@ export default function ProjectCard({
                     className={cn("-z-50 absolute bottom-0 inset-0 pointer-events-none top-0",
                         randomBackgroundPattern())}></div>
             }
-
             <div
-                className="flex items-center h-full w-full justify-center gap-4 p-6 rounded-md ">
+                className="flex items-center h-full w-full justify-center gap-4 p-6 rounded-md md:flex-row flex-col">
                 {project.image_url && (
-                    <div className="w-24 min-w-24 aspect-square">
+                    <div className="h-24 w-24 min-w-24 min-h-24 aspect-square">
                         <img
                             src={`/storage/${project.image_url}`}
                             alt="Project Image"

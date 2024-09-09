@@ -55,7 +55,7 @@ export default function Home({portfolio}: PageProps) {
                     <Divider className="mt-0"/>
 
                     <HomeSection title="Some of my Projects">
-                        <div className="flex flex-col gap-6 mx-6">
+                        <div className="flex flex-col gap-6">
                             {portfolio.projects.map((project) => (
                                 <ProjectCard
                                     key={project.id}

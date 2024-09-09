@@ -38,7 +38,7 @@ function TimelineItem({
 export default function HomeTimeline({portfolio}: { portfolio: PageProps['portfolio'] }) {
     return (
         <HomeSection title="Work Experience" className="mb-0">
-            <ol className="relative mx-6 mt-6 border-primary-700 border-s">
+            <ol className="relative mx-2 mt-6 border-primary-700 border-s">
                 {portfolio.experiences.map((experience) => (
                     <TimelineItem
                         key={experience.id}
