@@ -8,7 +8,7 @@ import TechCard from "@/Components/Home/TechCard";
 import SecondaryButton from "@/Components/Buttons/SecondaryButton";
 import HomeTimeline from "@/Components/HomeSections/HomeTimeline";
 import HomeSection from "@/Components/HomeSections/HomeSection";
-import ProjectCard from "@/Components/Home/ProjectCard";
+import ProjectCard from "@/Components/Project/ProjectCard";
 import LinkButton from "@/Components/Buttons/LinkButton";
 import DynamicFAIcon from "@/Components/Icons/DynamicFAIcons";
 import Markdown from "react-markdown";

@@ -69,5 +69,5 @@ export default {
         },
     },
 
-    plugins: [forms, require("tailwindcss-bg-patterns")],
+    plugins: [forms, require("tailwindcss-bg-patterns"), require("tailwindcss-animate")],
 };

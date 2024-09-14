@@ -1,68 +1,65 @@
-import { Fragment, PropsWithChildren } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import React, {ReactNode} from 'react';
+import * as Dialog from '@radix-ui/react-dialog';
+import {FaTimes} from 'react-icons/fa';
+import {cn} from '@/lib/utils';
 
-export default function Modal({
-    children,
-    show = false,
-    maxWidth = '2xl',
-    closeable = true,
-    onClose = () => {},
-}: PropsWithChildren<{
-    show: boolean;
-    maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-    closeable?: boolean;
-    onClose: CallableFunction;
-}>) {
-    const close = () => {
-        if (closeable) {
-            onClose();
-        }
-    };
-
-    const maxWidthClass = {
-        sm: 'sm:max-w-sm',
-        md: 'sm:max-w-md',
-        lg: 'sm:max-w-lg',
-        xl: 'sm:max-w-xl',
-        '2xl': 'sm:max-w-2xl',
-    }[maxWidth];
-
-    return (
-        <Transition show={show} as={Fragment} leave="duration-200">
-            <Dialog
-                as="div"
-                id="modal"
-                className="fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center z-50 transform transition-all"
-                onClose={close}
-            >
-                <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <div className="absolute inset-0 bg-gray-500/75" />
-                </Transition.Child>
-
-                <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                    enterTo="opacity-100 translate-y-0 sm:scale-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                >
-                    <Dialog.Panel
-                        className={`mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass}`}
-                    >
-                        {children}
-                    </Dialog.Panel>
-                </Transition.Child>
-            </Dialog>
-        </Transition>
-    );
+interface ModalProps {
+    trigger: ReactNode;
+    title?: string;
+    description?: string;
+    children: ReactNode;
 }
+
+const Modal: React.FC<ModalProps> = ({
+                                         trigger,
+                                         title,
+                                         description,
+                                         children,
+                                     }) => (
+    <Dialog.Root>
+        <Dialog.Trigger asChild>
+            {trigger}
+        </Dialog.Trigger>
+        <Dialog.Portal>
+            <Dialog.Overlay
+                className={cn(
+                    "fixed inset-0 z-50 bg-black/30 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 overflow-y-auto max-h-screen grid place-items-center",
+                )}>
+                <Dialog.Content
+                    className={cn(
+                        "z-50 relative grid w-full max-w-lg gap-4 bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg md:w-full",
+                    )}
+                >
+                    {title && (
+                        <div className="flex flex-col space-y-1.5 text-center sm:text-left">
+                            {title && (
+                                <Dialog.Title className="text-lg font-semibold leading-none tracking-tight">
+                                    {title}
+                                </Dialog.Title>
+                            )}
+                            {description && (
+                                <Dialog.Description className="text-sm text-muted-foreground">
+                                    {description}
+                                </Dialog.Description>
+                            )}
+                        </div>
+                    )}
+
+                    {children}
+
+                    <Dialog.Close asChild>
+                        <button
+                            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100  disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                            aria-label="Close"
+                        >
+                            <FaTimes size={16}/>
+                            <span className="sr-only">Close</span>
+                        </button>
+                    </Dialog.Close>
+                </Dialog.Content>
+            </Dialog.Overlay>
+        </Dialog.Portal>
+    </Dialog.Root>
+);
+
+export default Modal;
