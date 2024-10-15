@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => env('APP_PORTFOLIO_NAME', 'Bilal Pervez'),
+            'email' => env('APP_PORTFOLIO_EMAIL', 'rajabilal555@gmail.com'),
         ]);
     }
 }
