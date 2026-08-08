@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not found" description="That page is not here.">
+  <section class="bento" aria-label="Not found">
+    <article class="cell cell--hero cell--accent reveal is-in" style="--i: 0">
+      <span class="cell__label">404</span>
+      <div>
+        <h1 class="hero-title">Not found</h1>
+        <p class="lede">That URL is not on this site.</p>
+        <div class="hero-actions">
+          <a class="cta-fill" href="/">Back home</a>
+          <a class="cta-outline" href="/work">See work</a>
+        </div>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

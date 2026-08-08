@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rbpx-dev",
+  "compatibility_date": "2026-08-08",
+  // Static site. Cloudflare Pages / Workers Assets can serve ./dist after `pnpm build`.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

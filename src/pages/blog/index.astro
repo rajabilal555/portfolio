@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts, getSite } from '../../lib/site';
+
+const site = await getSite();
+if (!site.enable_blog) {
+  return Astro.redirect('/');
+}
+
+const posts = await getPosts();
+---
+
+<BaseLayout title="Blog" description={`Writing from ${site.name}.`}>
+  <h1 class="page-title">Blog</h1>
+
+  {
+    posts.length === 0 ? (
+      <p class="empty">No posts yet.</p>
+    ) : (
+      <ul class="blog-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`}>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

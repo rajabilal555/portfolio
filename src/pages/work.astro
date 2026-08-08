@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getProjects, getSite } from '../lib/site';
+import { render } from 'astro:content';
+
+const site = await getSite();
+const projects = await getProjects();
+const rendered = await Promise.all(
+  projects.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  }),
+);
+
+let i = 0;
+const next = () => i++;
+---
+
+<BaseLayout title="Work" description={`Projects and notes from ${site.name}.`}>
+  <p class="section-kicker reveal" style={`--i: ${next()}`}>Selected systems</p>
+  <h1 class="page-title reveal" style={`--i: ${next()}`}>Work</h1>
+
+  <section class="bento" aria-label="Projects">
+    {
+      rendered.map(({ entry, Content }, index) => (
+        <article
+          class:list={[
+            'cell',
+            'reveal',
+            index === 0 && 'cell--feature',
+            index === 1 && 'cell--wide',
+          ]}
+          style={`--i: ${next()}`}
+        >
+          <span class="cell__label">{String(index + 1).padStart(2, '0')} · {entry.data.tags[0]}</span>
+          <div>
+            <h2 class="cell__title">{entry.data.title}</h2>
+            <div class="cell__body">
+              <Content />
+            </div>
+            <div class="cell__tags cell__tags--spaced">
+              {entry.data.tags.map((tag) => (
+                <span class="chip">{tag}</span>
+              ))}
+            </div>
+          </div>
+          {entry.data.links.length > 0 ? (
+            <div class="social-row">
+              {entry.data.links.map((link) => (
+                <a class="link" href={link.url}>
+                  {link.label} →
+                </a>
+              ))}
+            </div>
+          ) : (
+            <span class="cell__meta">Private / client</span>
+          )}
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

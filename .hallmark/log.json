@@ -1,0 +1,33 @@
+[
+  {
+    "date": "2026-08-08",
+    "macrostructure": "Bento Grid",
+    "theme": "custom",
+    "theme_axes": "dark / grotesk-sans / warm",
+    "vibe": "karachi dusk saffron",
+    "enrichment": "CSS aurora",
+    "nav": "N5",
+    "footer": "Ft2",
+    "brief": "palette refresh + footer PKT clock"
+  },
+  {
+    "date": "2026-08-08",
+    "macrostructure": "Bento Grid",
+    "theme": "studied-DNA",
+    "theme_axes": "dark / grotesk-sans / chromatic-other",
+    "enrichment": "CSS aurora",
+    "nav": "N5",
+    "footer": "Ft2",
+    "brief": "rbpx.dev bento redesign with motion"
+  },
+  {
+    "date": "2026-08-08",
+    "macrostructure": "Long Document",
+    "theme": "studied-DNA",
+    "theme_axes": "dark / grotesk-sans / chromatic-other",
+    "enrichment": "none",
+    "nav": "N9",
+    "footer": "Ft2",
+    "brief": "rbpx.dev Astro portfolio"
+  }
+]

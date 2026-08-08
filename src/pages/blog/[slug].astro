@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPosts, getSite } from '../../lib/site';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const site = await getSite();
+  if (!site.enable_blog) {
+    return [];
+  }
+
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+if (!post) {
+  return Astro.redirect('/blog');
+}
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <p class="meta">{post.data.pubDate.toISOString().slice(0, 10)}</p>
+  <h1 class="page-title">{post.data.title}</h1>
+  <article class="prose">
+    <Content />
+  </article>
+</BaseLayout>

@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatRange, getExperience, getProjects, getSite, getSkills } from '../lib/site';
+import { render } from 'astro:content';
+
+const site = await getSite();
+const experiences = await getExperience();
+const featured = await getProjects(true);
+const skills = await getSkills();
+
+const jobs = experiences.filter((entry) => entry.data.company !== 'SZABIST');
+const education = experiences.find((entry) => entry.data.company === 'SZABIST');
+
+const renderedJobs = await Promise.all(
+  jobs.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { entry, Content };
+  }),
+);
+
+let i = 0;
+const next = () => i++;
+---
+
+<BaseLayout description={site.lede}>
+  <p class="section-kicker reveal" style={`--i: ${next()}`}>Portfolio · {site.nick}</p>
+
+  <section class="bento" aria-label="Overview">
+    <article class={`cell cell--hero cell--accent reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">01 · Intro</span>
+      <div>
+        <h1 class="hero-title">
+          {site.first_name} {site.last_name}
+          <span class="nick">&lt;{site.nick} /&gt;</span>
+        </h1>
+        <p class="lede">{site.lede}</p>
+        <div class="hero-actions">
+          <a class="cta-fill" href="/work">See the work</a>
+          <a class="cta-outline" href="/contact">Email me</a>
+          {
+            site.resume && (
+              <a class="cta-outline" href={site.resume}>
+                Resume
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </article>
+
+    <article class={`cell reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">02 · Now</span>
+      <div>
+        <h2 class="cell__title">Flutter at Carly</h2>
+        <p class="cell__body">Shipping mobile product while freelancing full-stack on the side.</p>
+      </div>
+      <span class="cell__meta">Oct 2023 – now</span>
+    </article>
+
+    <article class={`cell reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">03 · Base</span>
+      <div>
+        <h2 class="cell__title">{site.location}</h2>
+        <p class="cell__body">Remote-friendly. Fastest path is email.</p>
+      </div>
+      <a class="link" href={`mailto:${site.email}`}>Write →</a>
+    </article>
+
+    <article class={`cell cell--wide reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">04 · Stack</span>
+      <div class="cell__tags" aria-label="Skills">
+        {skills.map((skill) => <span class="chip">{skill.data.name}</span>)}
+      </div>
+    </article>
+  </section>
+
+  <p class="section-kicker section-kicker--spaced reveal" style={`--i: ${next()}`}>
+    Where I got things done
+  </p>
+
+  <section class="bento" aria-label="Experience">
+    {
+      renderedJobs.map(({ entry, Content }, index) => (
+        <article
+          class:list={['cell', 'reveal', index === 0 && 'cell--feature']}
+          style={`--i: ${next()}`}
+        >
+          <span class="cell__label">
+            {String(index + 1).padStart(2, '0')} · {entry.data.company}
+          </span>
+          <div>
+            <h2 class="cell__title">{entry.data.title}</h2>
+            <div class="cell__body">
+              <Content />
+            </div>
+          </div>
+          <span class="cell__meta">
+            {formatRange(entry.data.start, entry.data.end, entry.data.current)}
+          </span>
+        </article>
+      ))
+    }
+
+    {
+      education && (
+        <article class={`cell reveal`} style={`--i: ${next()}`}>
+          <span class="cell__label">Edu · SZABIST</span>
+          <div>
+            <h2 class="cell__title">{education.data.title}</h2>
+            <p class="cell__body">CGPA 3.78 · Computer Science</p>
+          </div>
+          <span class="cell__meta">
+            {formatRange(education.data.start, education.data.end, education.data.current)}
+          </span>
+        </article>
+      )
+    }
+  </section>
+
+  <p class="section-kicker section-kicker--spaced reveal" style={`--i: ${next()}`}>
+    Selected work
+  </p>
+
+  <section class="bento" aria-label="Selected projects">
+    {
+      featured.map((project, index) => (
+        <article
+          class:list={['cell', 'reveal', index === 0 && 'cell--wide']}
+          style={`--i: ${next()}`}
+        >
+          <span class="cell__label">{String(index + 1).padStart(2, '0')} · Project</span>
+          <div>
+            <h2 class="cell__title">{project.data.title}</h2>
+            <p class="cell__body">{project.data.tags.join(' · ')}</p>
+          </div>
+          {project.data.links[0] ? (
+            <a class="link" href={project.data.links[0].url}>
+              {project.data.links[0].label} →
+            </a>
+          ) : (
+            <a class="link" href="/work">
+              Details →
+            </a>
+          )}
+        </article>
+      ))
+    }
+
+    <article class={`cell cell--accent reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">More</span>
+      <div>
+        <h2 class="cell__title">Full project index</h2>
+        <p class="cell__body">Hosting, Flutter apps, CLI tools, and university systems.</p>
+      </div>
+      <a class="link" href="/work">Open work →</a>
+    </article>
+  </section>
+</BaseLayout>

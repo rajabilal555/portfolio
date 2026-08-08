@@ -1,0 +1,16 @@
+---
+const tz = 'Asia/Karachi';
+
+const initialTime = new Intl.DateTimeFormat('en-GB', {
+  timeZone: tz,
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+}).format(new Date());
+---
+
+<p class="pkt-clock" data-pkt-clock>
+  <span>Karachi</span>
+  <span data-pkt-time>{initialTime}</span>
+  <span class="pkt-clock__zone">PKT</span>
+</p>

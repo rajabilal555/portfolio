@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSite } from '../lib/site';
+
+const site = await getSite();
+let i = 0;
+const next = () => i++;
+---
+
+<BaseLayout title="Contact" description={`Email ${site.name}.`}>
+  <p class="section-kicker reveal" style={`--i: ${next()}`}>Get in touch</p>
+
+  <section class="bento" aria-label="Contact">
+    <article class={`cell cell--hero cell--accent reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">01 · Contact</span>
+      <div>
+        <h1 class="hero-title">Let’s build something that ships.</h1>
+        <p class="lede">
+          For work, collaboration, or a question about something I shipped — email is the fastest
+          path.
+        </p>
+        <div class="hero-actions contact-actions">
+          <a class="cta-fill" href={`mailto:${site.email}`}>Email me</a>
+          {
+            site.resume && (
+              <a class="cta-outline" href={site.resume}>
+                Resume
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </article>
+
+    <article class={`cell reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">02 · Socials</span>
+      <div class="social-row social-row--stack">
+        {
+          site.links.map((link) => (
+            <a class="link" href={link.url}>
+              {link.name} →
+            </a>
+          ))
+        }
+      </div>
+    </article>
+
+    <article class={`cell reveal`} style={`--i: ${next()}`}>
+      <span class="cell__label">03 · Location</span>
+      <div>
+        <h2 class="cell__title">{site.location}</h2>
+        <p class="cell__body">Remote-friendly across timezones.</p>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

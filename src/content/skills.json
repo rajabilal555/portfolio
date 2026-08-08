@@ -1,0 +1,18 @@
+[
+  { "id": "01-flutter", "name": "Flutter" },
+  { "id": "02-react", "name": "React" },
+  { "id": "03-typescript", "name": "TypeScript" },
+  { "id": "04-tailwind", "name": "Tailwind" },
+  { "id": "05-laravel", "name": "Laravel" },
+  { "id": "06-node", "name": "Node" },
+  { "id": "07-nextjs", "name": "Next.js" },
+  { "id": "08-mysql", "name": "MySQL" },
+  { "id": "09-mongodb", "name": "MongoDB" },
+  { "id": "10-firestore", "name": "Firestore" },
+  { "id": "11-aws", "name": "AWS" },
+  { "id": "12-docker", "name": "Docker" },
+  { "id": "13-linux", "name": "Linux" },
+  { "id": "14-git", "name": "Git" },
+  { "id": "15-electron", "name": "Electron" },
+  { "id": "16-rust", "name": "Rust" }
+]

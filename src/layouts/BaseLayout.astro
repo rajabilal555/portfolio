@@ -1,0 +1,130 @@
+---
+import '../styles/global.css';
+import PakistanClock from '../components/PakistanClock.astro';
+import { getSite } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const site = await getSite();
+const { title, description = site.lede } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : `${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora__blob aurora__blob--a"></div>
+      <div class="aurora__blob aurora__blob--b"></div>
+      <div class="aurora__noise"></div>
+    </div>
+
+    <nav class="nav-pill" aria-label="Primary">
+      <a class="wordmark" href="/">{site.nick}</a>
+      <ul class="nav-pill__links">
+        <li>
+          <a href="/" aria-current={path === '/' ? 'page' : undefined}>home</a>
+        </li>
+        {
+          site.enable_blog && (
+            <li>
+              <a href="/blog" aria-current={path.startsWith('/blog') ? 'page' : undefined}>
+                blog
+              </a>
+            </li>
+          )
+        }
+        <li>
+          <a href="/work" aria-current={path === '/work' ? 'page' : undefined}>work</a>
+        </li>
+      </ul>
+      <a class="nav-pill__cta" href="/contact">contact</a>
+    </nav>
+
+    <div class="shell">
+      <main>
+        <slot />
+      </main>
+
+      <footer class="foot-line">
+        <p>© {new Date().getFullYear()} {site.name}</p>
+        <PakistanClock />
+      </footer>
+    </div>
+
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const narrow = window.matchMedia('(max-width: 39.99rem)').matches;
+      const cells = document.querySelectorAll<HTMLElement>('.cell');
+
+      if (!reduce && !narrow) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -4% 0px' },
+        );
+
+        document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-in'));
+      }
+
+      if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        for (const cell of cells) {
+          cell.addEventListener('pointermove', (event) => {
+            const rect = cell.getBoundingClientRect();
+            const x = ((event.clientX - rect.left) / rect.width) * 100;
+            const y = ((event.clientY - rect.top) / rect.height) * 100;
+            cell.style.setProperty('--mx', `${x}%`);
+            cell.style.setProperty('--my', `${y}%`);
+          });
+        }
+      }
+
+      const TZ = 'Asia/Karachi';
+      const pktFmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone: TZ,
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      });
+
+      function tickClocks() {
+        const time = pktFmt.format(new Date());
+        for (const el of document.querySelectorAll('[data-pkt-time]')) {
+          el.textContent = time;
+        }
+      }
+
+      tickClocks();
+      window.setInterval(tickClocks, 15_000);
+    </script>
+  </body>
+</html>
